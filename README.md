@@ -1,9 +1,13 @@
 # projects
 
 Factor performance introduction
+
+
 Input:
 
 daily price and volume data in any time frame
+
+
 Process:
 
 calulate sparse inverse covariances (covariance.GraphicalLassoCV) of all stocks price(or volume) series
@@ -20,6 +24,8 @@ Uses:
 Given a basket, say Saas stocks, see who is traded away from the basket
 Given a market event, see how the affected stocks react differently
 Compare monthly trading behaviours to identify market shifts
+
+
 Others:
 
 symbol dictionary generator for bulk analyses
