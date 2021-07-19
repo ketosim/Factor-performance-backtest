@@ -19,6 +19,8 @@ Variations:
 input 1 daily_change = close_price - open_price
 input 2 daily_volatility = today's high - today's low
 input 3 volume = today's volume - 10 day moving average volume
+
+
 Uses:
 
 Given a basket, say Saas stocks, see who is traded away from the basket
