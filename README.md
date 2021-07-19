@@ -1,7 +1,7 @@
 # projects
-
-Factor performance introduction
 Factor performance backtest
+
+
 Purposes:
 
 Backtest fundamental and market-oriented factors and analyse the predictiveness of a factor based on different set-ups
