@@ -1,4 +1,4 @@
-# Actor Performance Backtest
+# Factor Performance Backtest
 
 ## **Purpose**
 - Backtest fundamental and market-oriented factors and analyze the predictiveness of a factor based on different setups.
