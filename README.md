@@ -1,65 +1,81 @@
-# projects
-Factor performance backtest
+# Actor Performance Backtest
 
+## **Purpose**
+- Backtest fundamental and market-oriented factors and analyze the predictiveness of a factor based on different setups.
+- Explore setups including sector neutrality, factor/equal weightings, and various rebalancing periods.
 
-Purposes:
+## **Input**
+- Fundamental data and market trading data are used to construct factor data.
 
-Backtest fundamental and market-oriented factors and analyse the predictiveness of a factor based on different set-ups
-Set-ups include sector neutrality, factor/equal weightings and different rebalancing periods
+## **Processes**
+1. **Data Construction:**
+    - Input data (fundamental and trading data) is cleaned and quantized to construct factor data. Examples of factors include:
+      - Price-to-Sales Ratio (P/S)
+      - 1-Year Sales Growth
 
+2. **Weightings of Stocks in Each Quantile:**
+    - Calculate weightings based on different setups:
+      - **Long-only portfolio**
+      - **Long-short portfolio**
+    - Weighting options include:
+      - Sector-neutral, equal-weighted
+      - Absolute equal-weighted
+      - Sector-neutral, factor-weighted
+      - Absolute factor-weighted
 
-Input:
+3. **Calculate Portfolio Returns:**
+    - Calculate portfolio returns based on the selected rebalancing setup.
+    - Options for rebalancing periods (e.g., monthly, quarterly).
 
-Fundamental data and market trading data are used to construct factor data
+4. **Visualize Results:**
+    - Plot cumulative returns by quantile.
+    - Provide detailed analysis of long-short portfolios and factor predictiveness.
 
+## **Outputs**
+- **Average Return:** Return for each quantile.
+- **Top Quintile Minus Bottom Quintile:** Return difference for long-short portfolios.
+- **Cumulative Returns:** Returns by quantile, including rebalancing effects.
 
-Processes:
+### **Note:**
+- Sector neutrality and weighting options are designed to account for cases where some sectors are naturally overrepresented in certain factor quintiles. For example, backtesting the P/S factor without sector neutrality from 2017-2020 primarily involves a long technology/short value strategy. Applying sector neutrality offers a clearer assessment of the factor’s performance over time.
 
-Input data (fundmantal and trading data to form a factor, such as P/S, 1Yr sales growth) are cleaned and quantised to construct factor data
-Weightings of stocks in each quantile are calcualted. Options for weightings include long-only portfolio and long-short portpolio of the following set-ups: sector neutral equal-weighted, absolute equal-weighted, sector neutral factor-weighted and absolute factor-weighted*
-Calculate portfolio returns based on rebalancing set-up and plot the results
+- **Platform Dependency:** This notebook relies on input data from the Quantopian platform.
 
+---
 
-Outputs:
+# Stock Correlation Visualization
 
-Average return for each quantile
-Top quintile return minus bottom quintile return (long-short portfolio)
-Cumulative returns by quintile with rebalancing
-*Sector neutrality and weighting options are designed to cover a wide range of factors -- some sectors are overly represented in a factor quintile by nature. For example, backtesting P/S factor without sector neutrality over the period of 2017-2020 is essentially a long technology and short value stocks strategy. Allowing sector neutrality gives a purer picture of the factor performance over time, free from heavily skewed market trend.
+## **Input**
+- Daily price and volume data over any time frame.
 
-The notebook relies on input data from Quantopian platform.
+## **Process**
+1. **Calculate Sparse Inverse Covariances:**
+    - Use `covariance.GraphicalLassoCV` on stock price or volume series to compute covariances.
+    - This shows the connectedness of stocks, indicating how they are traded together as a group.
 
+2. **Cluster Tickers:**
+    - Group tickers based on covariances using **Affinity Propagation**, which does not require specifying the number of clusters.
 
+3. **Visualize Connectedness:**
+    - Color nodes by cluster membership.
+    - Adjust edge thickness to reflect the strength of connectedness between tickers using **`manifold.LocallyLinearEmbedding`**.
 
+## **Variations:**
+- **Input 1:** Daily change = Close price - Open price
+- **Input 2:** Daily volatility = Today’s high - Today’s low
+- **Input 3:** Volume = Today’s volume - 10-day moving average volume
 
-Stock Correlation visualisation
+## **Uses:**
+- **Analyze Basket Behavior:**
+    - Given a basket (e.g., SaaS stocks), identify which stocks are traded differently from the group.
 
+- **Monitor Market Events:**
+    - Detect how affected stocks respond differently during significant market events.
 
-Input:
+- **Identify Market Shifts:**
+    - Compare monthly trading behavior to detect shifts in market dynamics.
 
-daily price and volume data in any time frame
+---
 
-
-Process:
-
-calulate sparse inverse covariances (covariance.GraphicalLassoCV) of all stocks price(or volume) series
-covariances show connectedness of all tickers, i.e. stocks are traded together as a group
-group tickers based on covariances (Affinity Propagation, non-equal number clusters)
-visulisation: color of nodes showing clusters, thickness of edges showing connectedness (manifold.LocallyLinearEmbedding)
-Variations:
-
-input 1 daily_change = close_price - open_price
-input 2 daily_volatility = today's high - today's low
-input 3 volume = today's volume - 10 day moving average volume
-
-
-Uses:
-
-Given a basket, say Saas stocks, see who is traded away from the basket
-Given a market event, see how the affected stocks react differently
-Compare monthly trading behaviours to identify market shifts
-
-
-Others:
-
-symbol dictionary generator for bulk analyses
+# Symbol Dictionary Generator for Bulk Analyses
+- Generate symbol dictionaries to facilitate large-scale analyses across multiple tickers and datasets.
