@@ -1,3 +1,5 @@
+# quantopian has stopped supporting import
+
 import scipy.stats
 import numpy as np
 import pandas as pd
