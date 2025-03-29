@@ -1,4 +1,4 @@
-
+# quantopian has stopped supporting import
 %matplotlib inline
 from datetime import datetime
 import matplotlib.pyplot as plt
